@@ -57,7 +57,7 @@
             "http[s]?://www.avito.ru/[^/]+/("+types+")/[^\\?]*_[\\d]+\\?",
         ],
 
-        trigger: "span.description__phone-insert.j-phone-show__insert img.description__phone-img",
+        trigger: "span.description__phone-insert.js-phone-show__insert img.description__phone-img",
 
         untrigger: [
             "div.alert p:contains(\"заблокировано\")",
@@ -66,11 +66,11 @@
         ],
         
         // FIXME move this to capture stuff
-        clicks: ["span.j-phone-show__insert span.btn__text"],
+        clicks: ["span.js-phone-show__insert span.btn__text"],
 
         capture: {
             phoneImage: {
-                selector: "span.description__phone-insert.j-phone-show__insert img.description__phone-img",
+                selector: "span.description__phone-insert.js-phone-show__insert img.description__phone-img",
                 dropSize: true,
             },
 
@@ -85,7 +85,7 @@
                         iterator: {},
                     }
 
-                    var zoomer = "td.big-picture a.j-zoom-gallery-link";
+                    var zoomer = "td.big-picture a.js-zoom-gallery-link";
                     var zoomable = $(zoomer).length > 0;
                     var single = $("div.gallery-item a.gallery-link img").length == 0;
                     
@@ -310,7 +310,7 @@
             },
 
             type: {
-                selector: "div.description-expanded div.item-params div a[title*=\"Тип объявления\"]",
+                selector: "div.description-expanded div.item-params a[title*=\"Тип объявления\"]",
                 data: {
                     type: {
                         conv: function (s) {
@@ -325,7 +325,7 @@
             },
 
             rooms: {
-                selector: "div.description-expanded div.item-params div a[title*=\"Количество комнат\"]",
+                selector: "div.description-expanded div.item-params a[title*=\"Количество комнат\"]",
                 data: {
                     rooms: {
                         rx: "(\\d+)\\D+",
@@ -335,7 +335,7 @@
             },
 
             area: {
-                selector: "div.description-expanded div.item-params div:eq(1)",
+                selector: "div.description-expanded div.item-params",
                 data: {
                     area: {
                         rx: "\\d*[-]*\\s*\\S+\\s+(\\d+)",
@@ -373,7 +373,7 @@
             },
 
             author_agent: {
-                selector: "div.description_term span.t-seller-title:contains('Агентство')",
+                selector: "div.description_term div.description_seller:contains('Агентство')",
                 data: {
                     author: {
                         conv: function (s) { if (s) return "agent"; }
@@ -382,7 +382,7 @@
             },
 
             author_owner: {
-                selector: "div.description_term span.t-seller-title:contains('Арендодатель')",
+                selector: "div.description_term div.description_seller:contains('Арендодатель')",
                 data: {
                     author: {
                         conv: function (s) { if (s) return "owner"; }
@@ -391,7 +391,7 @@
             },
 
             lat: {
-                selector: "#i_contact div.j-item-map",
+                selector: "#i_contact div.js-item-map",
                 attr: "data-map-lat",
                 data: {
                     lat: {}
@@ -399,7 +399,7 @@
             },
 
             lon: {
-                selector: "#i_contact div.j-item-map",
+                selector: "#i_contact div.js-item-map",
                 attr: "data-map-lon",
                 data: {
                     lon: {}

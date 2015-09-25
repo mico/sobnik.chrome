@@ -1,4 +1,4 @@
-/*  
+/*
     server.js - sobnik.chrome module
 
     Copyright (c) 2014 Artur Brugeman <brugeman.artur@gmail.com>
@@ -30,12 +30,12 @@
     var cmn = sobnik.require ("cmn");
 
     console.log ("Loading server");
-    
-    function bgPart () 
+
+    function bgPart ()
     {
         console.log ("Loading server.bg");
 
-        var apiUrl = "http://sobnik.com/api/";
+        var apiUrl = "http://api.sobnik.com/api/";
         var crossDomain = false;
         if (sobnik.debugLocalhost)
         {
@@ -93,7 +93,7 @@
                 setToken ("");
             }
 
-            function callback (data) 
+            function callback (data)
             {
                 console.log ("Token", data);
                 requestingToken = false;
@@ -103,7 +103,7 @@
             callExt ("token", callback, errback);
         }
 
-        function getToken () 
+        function getToken ()
         {
             if (token)
                 return;
@@ -130,7 +130,7 @@
                 setClientId ("");
             }
 
-            function callback (data) 
+            function callback (data)
             {
                 console.log ("ClientId", data);
                 requestingClientId = false;
@@ -140,7 +140,7 @@
             callExt ("client", callback, errback);
         }
 
-        function getClientId () 
+        function getClientId ()
         {
             if (clientId)
                 return;
@@ -310,16 +310,16 @@
         }
     }
 
-    function tabPart () 
+    function tabPart ()
     {
         console.log ("Loading server.tab");
 
         function bgCall (method, data, callback, errback)
         {
             chrome.runtime.sendMessage (
-                /* ext_id= */"", 
+                /* ext_id= */"",
                 {type: "server."+method, data: data},
-                /* options= */{}, 
+                /* options= */{},
                 function (response) {
                     if (!response || response.error)
                     {
@@ -352,7 +352,7 @@
             bgCall ("ads", request, callback, errback);
         }
 
-        // public 
+        // public
         function abuse (id, reason)
         {
             bgCall ("abuse", {id: id, reason: reason});
