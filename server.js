@@ -186,6 +186,9 @@
                 statusCode: statbacks,
                 error: function (xhr, status, error) {
                     console.log ("API Error, method: "+method+", status: "+status);
+                    // renew token, it can be 403 error
+                    setToken ("");
+                    requestToken ();
                     if (errback)
                         errback ();
                 }
